@@ -19,7 +19,11 @@ Route::middleware(['checkSubscribers', 'checkPc'])->group(function () {
 });
 
 Route::middleware(['checkPc'])->group(function () {
-    Auth::routes();
+    Auth::routes([
+        'register' => false, // Registration Routes...
+        'reset' => false, // Password Reset Routes...
+        'verify' => false, // Email Verification Routes...
+    ]);
     Route::middleware(['checkAdmin'])->group(function () {
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
         Route::resource('subscribers', App\Http\Controllers\SubscriberController::class);

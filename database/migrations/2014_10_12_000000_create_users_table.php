@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->boolean('status')->default(true);
             $table->string('pc_id')->nullable();
-            $table->enum('type', ['admin', 'subscriber'])->default('subscriber');
+            $table->enum('type', ['subscriber', 'admin'])->default('subscriber');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
