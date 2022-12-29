@@ -58,7 +58,7 @@ class BlogController extends AppBaseController
             $imageName = time() . '.' . request()->image->getClientOriginalExtension();
             request()->image->move(public_path('photos'), $imageName);
         }
-        $input['image'] = 'photos/'.$imageName;
+        $input['image'] = 'photos/' . $imageName;
         $blog = $this->blogRepository->create($input);
 
         return $this->sendSuccess('Blog saved successfully.');
@@ -121,8 +121,14 @@ class BlogController extends AppBaseController
 
             return redirect(route('blogs.index'));
         }
-
-        $blog = $this->blogRepository->update($request->all(), $id);
+        unlink(public_path('/') . $blog->image);
+        $input = $request->all();
+        if ($request->file('image')) {
+            $imageName = time() . '.' . request()->image->getClientOriginalExtension();
+            request()->image->move(public_path('photos'), $imageName);
+        }
+        $input['image'] = 'photos/' . $imageName;
+        $blog = $this->blogRepository->update($input, $id);
 
         Flash::success('Blog updated successfully.');
 
@@ -143,7 +149,7 @@ class BlogController extends AppBaseController
         if (empty($blog)) {
             return $this->sendError('Blog not found');
         }
-         unlink(public_path('/').$blog->image);
+        unlink(public_path('/') . $blog->image);
         $this->blogRepository->delete($id);
         return $this->sendSuccess('Blog deleted successfully.');
     }

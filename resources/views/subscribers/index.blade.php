@@ -31,12 +31,12 @@
                     <div class="row p-1">
                         <div class="col-sm-2">
                             <label for="name">name</label>
-                            <input type="text" name="name" class="form-control" id="name" placeholder="name">
+                            <input type="text" name="name" class="form-control" placeholder="name">
                         </div>
                         <!-- Name Field -->
                         <div class="col-sm-2">
                             <label for="username">username</label>
-                            <input type="text" name="username" class="form-control" id="username"
+                            <input type="text" name="username" class="form-control"
                                    placeholder="username">
                         </div>
 

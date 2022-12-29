@@ -39,12 +39,7 @@ class SubscriberDataTable extends DataTable
      */
     public function query(User $model)
     {
-        return $model->where('type', 'subscriber')->where(
-            function ($q) {
-                if (request()->has('name')) {
-                    $q->where('title', 'like', "%" . request('title') . "%");
-                }
-            })->newQuery();
+        return $model->where('type', 'subscriber')->newQuery();
     }
 
     /**
