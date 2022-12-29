@@ -31,28 +31,28 @@
                         <div class="row p-1">
                             <div class="col-sm-2">
                                 <label for="title">title</label>
-                                <input type="text" name="title" class="form-control" id="title" placeholder="title">
+                                <input type="text" name="title" class="form-control" placeholder="title">
                             </div>
                             <!-- Name Field -->
                             <div class="col-sm-2">
                                 <label for="content">content</label>
-                                <input type="text" name="content" class="form-control" id="content"
+                                <input type="text" name="content" class="form-control"
                                        placeholder="content">
                             </div>
                             <!-- Name Field -->
                             <div class="col-sm-2">
                                 <label for="publishDate">publish from</label>
                                 <input type="date" name="from" class="form-control"
-                                       id="publishDate" placeholder="publish Date">
+                                       placeholder="publish Date">
                             </div>
                             <div class="col-sm-2">
                                 <label for="publishDate">publish to</label>
                                 <input type="date" name="to" class="form-control"
-                                       id="publishDate" placeholder="publish Date">
+                                       placeholder="publish Date">
                             </div>
                             <!-- Name Field -->
                             <div class="col-sm-3 mt-4">
-                                <input type="submit" id="submit">
+                                <input type="submit" value="filter" id="submit">
                             </div>
                         </div>
                     </form>

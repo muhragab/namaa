@@ -42,7 +42,7 @@
 
                         <!-- Name Field -->
                         <div class="col-sm-3 mt-4">
-                            <input type="submit" id="submit">
+                            <input type="submit" value="filter" id="submit">
                         </div>
                     </div>
                 </form>
