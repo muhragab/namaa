@@ -24,23 +24,7 @@ class BlogDataTable extends DataTable
                 return '<a href="' . $url . '" target="_blank">
                 <img src=' . $url . ' border="0" width="40" class="img-rounded" align="center"/>
                 </a>';
-            })->rawColumns(['image', 'action'])
-            ->filter(function ($query) {
-                $input = array_filter(request()->all());
-                if (isset($input['title'])) {
-                    $query->where('title', 'like', "%" . request('title') . "%");
-                }
-                if (isset($input['content'])) {
-                    $query->where('content', 'like', "%" . request('content') . "%");
-                }
-                if (isset($input['from'])) {
-                    $query->whereDate('publish_date', '>=', request('from'));
-                }
-
-                if (isset($input['to'])) {
-                    $query->whereDate('publish_date', '<=', request('to'));
-                }
-            });
+            })->rawColumns(['image', 'action']);
     }
 
     /**
@@ -51,7 +35,15 @@ class BlogDataTable extends DataTable
      */
     public function query(Blog $model)
     {
-        return $model->newQuery();
+        return $model->where(function ($query) {
+            $input = array_filter(request()->all());
+            if (isset($input['name'])) {
+                $query->where('name', 'like', "%" . request('name') . "%");
+            }
+            if (isset($input['username'])) {
+                $query->where('username', 'like', "%" . request('username') . "%");
+            }
+        })->newQuery();
     }
 
     /**

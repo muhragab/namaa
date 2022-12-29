@@ -6,6 +6,7 @@ use App\Models\Subscriber;
 use App\Models\User;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use function GuzzleHttp\Promise\all;
 
 class SubscriberDataTable extends DataTable
 {
@@ -19,16 +20,7 @@ class SubscriberDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'subscribers.datatables_actions')
-            ->filter(function ($query) {
-                $input = array_filter(request()->all());
-                if (isset($input['name'])) {
-                    $query->where('name', 'like', "%" . request('name') . "%");
-                }
-                if (isset($input['username'])) {
-                    $query->where('username', 'like', "%" . request('username') . "%");
-                }
-            });
+        return $dataTable->addColumn('action', 'subscribers.datatables_actions');
     }
 
     /**
@@ -39,7 +31,17 @@ class SubscriberDataTable extends DataTable
      */
     public function query(User $model)
     {
-        return $model->where('type', 'subscriber')->newQuery();
+
+        return $model->where('type', 'subscriber')
+            ->where(function ($query){
+                $input = array_filter(request()->all());
+                if (isset($input['name'])) {
+                    $query->where('name', 'like', "%" . request('name') . "%");
+                }
+                if (isset($input['username'])) {
+                    $query->where('username', 'like', "%" . request('username') . "%");
+                }
+            })->newQuery();
     }
 
     /**
